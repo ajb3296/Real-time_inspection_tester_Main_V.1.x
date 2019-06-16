@@ -12,17 +12,17 @@ import shutil
 import socket
 
 if __name__=="__main__":
-    '''
+    
     # 압축 상태 확인
     if not os.path.exists("system/Real-time_inspection_test"):
         print("Please unzip the file properly and execute it.\n\nPress the ENTER key to exit the program.")
         os.system("pause")
         exit()
-'''
+
     # 기본설정
     os.system("title Real-time_inspection_tester V.2.0")
     os.system("mode.com con cols=120 lines=40")
-    if os.path.exists("system/1d"):
+    if os.path.exists("system/ver"):
         file = open("system/ver", "r", encoding='UTF-8')
         version=file.read()
         file.close()
