@@ -46,7 +46,6 @@ if __name__=="__main__":
                                     :usJ:
                                    .BU..       ..
                                   :BE       iKBBBBB
-
                                   ;'     .dBBBBBBRBK
                                  /    :vPEbSBBDSjv12
                        .iv.     / .7IZDZU7. .SYssJv.
