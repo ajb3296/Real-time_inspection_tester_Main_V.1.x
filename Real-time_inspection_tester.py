@@ -74,7 +74,7 @@ Please select a language
 2. English - 영어
 """)
 
-            language = input("1/2 : ")
+            language = input("<1/2> : ")
 
             if language == '1' or language == 'ko' or language == '한글' or language == 'korean':
                 language="ko"
