@@ -124,21 +124,13 @@ Please select a language
     ipaddress=socket.gethostbyname(socket.gethostname())
     if ipaddress=="127.0.0.1":
         if language=="ko":
-
-            if version=="*.*":
-                print("\n    컴퓨터가 인터넷에 연결되어 있지 않습니다.\n    ENTER 키를 누르시면 종료합니다.")
-                os.system("pause>nul")
-                exit()
-            else:
-                print("\n    컴퓨터가 인터넷에 연결되어 있지 않습니다.\n    V.%s 버전을 실행할까요?" %version)
-
+            print("\n    컴퓨터가 인터넷에 연결되어 있지 않습니다.\n    ENTER 키를 누르시면 종료합니다.")
+            os.system("pause>nul")
+            exit()
         else:
-            if version=="*.*":
-                print("\n    Your computer is not connected to the Internet.\n    Press ENTER to exit.")
-                os.system("pause>nul")
-                exit()
-            else:
-                print("\n    Your computer is not connected to the Internet.\n    Do you want to run the V.%s version?" %version)
+            print("\n    Your computer is not connected to the Internet.\n    Press ENTER to exit.")
+            os.system("pause>nul")
+            exit()
 
     # 인터넷 연결되어있을때
     else:
@@ -156,7 +148,11 @@ Please select a language
     rtitpath = rtitpath.get_text()
 
     if not rtit==version:
-        print("프로그램을 새 버전으로 업데이트 해야 합니다. 자동으로 업데이트가 진행됩니다.\nYou need to update the program to a new version. The update will proceed automatically.")
+        if language=="ko":
+            updatemsg="프로그램을 새 버전으로 업데이트 해야 합니다. 자동으로 업데이트가 진행됩니다."
+        else:
+            updatemsg="You need to update the program to a new version. The update will proceed automatically."
+        print(updatemsg)
         
         # 업데이트 폴더 초기화
         try:
@@ -188,4 +184,10 @@ Please select a language
         exit()
 
     else:
+        # 설정파일 설치
+        file = open("update\Real-time_inspection_tester_V.%s-master\setting.xml" %rtit, "w", encoding='UTF-8')
+        file.write(html)
+        file.close()
+
+        # 실행
         os.system("call %s" %rtitpath)
