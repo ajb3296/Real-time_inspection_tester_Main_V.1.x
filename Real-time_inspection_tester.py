@@ -6,7 +6,6 @@ import time
 from bs4 import BeautifulSoup
 import requests
 import urllib.request
-import urllib2
 import zipfile
 import shutil
 import socket
@@ -47,6 +46,7 @@ if __name__=="__main__":
                                     :usJ:
                                    .BU..       ..
                                   :BE       iKBBBBB
+
                                   ;'     .dBBBBBBRBK
                                  /    :vPEbSBBDSjv12
                        .iv.     / .7IZDZU7. .SYssJv.
@@ -153,10 +153,10 @@ Please select a language
     rtit = rtit.get_text()
     rtitdownload = soup.find("rtitdownload")
     url = rtitdownload.get_text()
+    rtitpath = soup.find("rtitpath")
+    rtitpath = rtitpath.get_text()
 
-    if not os.path.exists("system/ver"):
-
-    if rtit==version or not os.path.exists("system/ver"):
+    if not rtit==version:
         print("프로그램을 새 버전으로 업데이트 해야 합니다. 자동으로 업데이트가 진행됩니다.\nYou need to update the program to a new version. The update will proceed automatically.")
         
         # 업데이트 폴더 초기화
@@ -185,6 +185,8 @@ Please select a language
         file.close()
 
         # 최신버전 실행
-        os.system("call update\Real-time_inspection_tester_V.%s-master\Real-time_inspection_tester.py" %rtit)
+        os.system("call %s" %rtitpath)
         exit()
-        
+
+    else:
+        os.system("call %s" %rtitpath)
