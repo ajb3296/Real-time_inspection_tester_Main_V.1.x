@@ -66,6 +66,7 @@ if __name__=="__main__":
     language="language"
 
     while True:
+        # 설정파일이 존재하지 않을 경우 언어 선택
         if not os.path.exists("setting.xml"):
             print("""언어를 선택하세요
 Please select a language
@@ -102,7 +103,8 @@ Please select a language
         file.close()
     else:
         pass
-            
+
+    # 설정파일 읽어오기
     file = open("setting.xml", "r", encoding='UTF-8')
     html=file.read()
     file.close()
@@ -113,8 +115,12 @@ Please select a language
     filename = filename.get_text()
     fileinside = soup.find("fileinside")
     fileinside = fileinside.get_text()
+
+    # 프로그램이 사용 가능한 언어인지 확인
     if language == "ko" or language == "en":
         pass
+    
+    # 지원하지 않는 언어일 경우
     else:
         print("Language error\n언어오류\n\nModify the language settings of the setting.xml file(en/ko)\nsetting.xml 파일의 언어설정을 수정하세요(en/ko)")
         os.system("pause")
@@ -132,7 +138,7 @@ Please select a language
             os.system("pause>nul")
             exit()
 
-    # 인터넷 연결되어있을때
+    # 인터넷 연결되어 있을때
     else:
         pass
 
@@ -147,6 +153,7 @@ Please select a language
     rtitpath = soup.find("rtitpath")
     rtitpath = rtitpath.get_text()
 
+    # 설치된 버전과 최신버전이 다를때
     if not rtit==version:
         if language=="ko":
             updatemsg="프로그램을 새 버전으로 업데이트 해야 합니다. 자동으로 업데이트가 진행됩니다."
@@ -174,7 +181,7 @@ Please select a language
         file.write(html)
         file.close()
 
-        # 최초 최신버전 다운로드 기록 저장/현재 버전 확인용
+        # 이전버전 다운로드 기록 저장 / 현재 버전 확인용
         file = open("system/ver", "w", encoding='UTF-8')
         file.write(rtit)
         file.close()
@@ -183,6 +190,7 @@ Please select a language
         os.system("call %s" %rtitpath)
         exit()
 
+    # 업데이트가 필요하지 않을 경우
     else:
         # 설정파일 설치
         file = open("update\Real-time_inspection_tester_V.%s-master\setting.xml" %rtit, "w", encoding='UTF-8')
@@ -191,3 +199,7 @@ Please select a language
 
         # 실행
         os.system("call %s" %rtitpath)
+        
+# 이 프로그램은 모듈이 아닙니다!
+else:
+    exit()
