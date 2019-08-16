@@ -128,15 +128,28 @@ Please select a language
 
     # 인터넷 연결 확인
     ipaddress=socket.gethostbyname(socket.gethostname())
+
+    # 인터넷 연결이 안되어 있을때
     if ipaddress=="127.0.0.1":
-        if language=="ko":
-            print("\n    컴퓨터가 인터넷에 연결되어 있지 않습니다.\n    ENTER 키를 누르시면 종료합니다.")
-            os.system("pause>nul")
-            exit()
+
+        # 이전에 다운받은 버전 존재 확인
+        if os.path.exists("system/rtitpath"):
+            file = open("system/rtitpath", "r", encoding='UTF-8')
+            rtitpath=file.read()
+            file.close()
+            # 이전에 설치해둔 버전 실행
+            os.system("call %s" %rtitpath)
+
+        # 이전에 받아둔 버전이 없을 경우
         else:
-            print("\n    Your computer is not connected to the Internet.\n    Press ENTER to exit.")
-            os.system("pause>nul")
-            exit()
+            if language=="ko":
+                print("\n    컴퓨터가 인터넷에 연결되어 있지 않고 이전에 설치한 프로그램이 존재하지 않습니다.\n    ENTER 키를 누르시면 종료합니다.")
+                os.system("pause>nul")
+                exit()
+            else:
+                print("\n    Your computer is not connected to the Internet and there are no programs installed previously.\n    Press ENTER to exit.")
+                os.system("pause>nul")
+                exit()
 
     # 인터넷 연결되어 있을때
     else:
@@ -186,6 +199,11 @@ Please select a language
         file.write(rtit)
         file.close()
 
+        # 이전버전 경로저장 / 인터넷 연결 없을때 이용
+        file = open("system/path", "w", encoding='UTF-8')
+        file.write(rtitpath)
+        file.close()
+
         # 최신버전 실행
         os.system("call %s" %rtitpath)
         exit()
@@ -199,7 +217,7 @@ Please select a language
 
         # 실행
         os.system("call %s" %rtitpath)
-        
+
 # 이 프로그램은 모듈이 아닙니다!
 else:
     exit()
