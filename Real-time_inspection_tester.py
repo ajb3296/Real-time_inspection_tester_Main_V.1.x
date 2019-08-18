@@ -70,7 +70,6 @@ if __name__=="__main__":
         if not os.path.exists("setting.xml"):
             print("""언어를 선택하세요
 Please select a language
-
 1. 한글 - Korean
 2. English - 영어
 """)
@@ -163,8 +162,10 @@ Please select a language
     rtit = rtit.get_text()
     rtitdownload = soup.find("rtitdownload")
     url = rtitdownload.get_text()
-    rtitpath = soup.find("rtitpath")
-    rtitpath = rtitpath.get_text()
+    rtitpath1 = soup.find("rtitpath1")
+    rtitpath1 = rtitpath1.get_text()
+    rtitpath2 = soup.find("rtitpath2")
+    rtitpath2 = rtitpath2.get_text()
 
     # 설치된 버전과 최신버전이 다를때
     if not rtit==version:
@@ -190,7 +191,7 @@ Please select a language
         zip_ref.close()
 
         # 설정파일 설치
-        file = open("update\Real-time_inspection_tester_V.%s-master\setting.xml" %rtit, "w", encoding='UTF-8')
+        file = open("%s/setting.xml" %rtitpath2, "w", encoding='UTF-8')
         file.write(html)
         file.close()
 
@@ -201,22 +202,22 @@ Please select a language
 
         # 이전버전 경로저장 / 인터넷 연결 없을때 이용
         file = open("system/path", "w", encoding='UTF-8')
-        file.write(rtitpath)
+        file.write(rtitpath1)
         file.close()
 
         # 최신버전 실행
-        os.system("call %s" %rtitpath)
+        os.system("call %s" %rtitpath1)
         exit()
 
     # 업데이트가 필요하지 않을 경우
     else:
         # 설정파일 설치
-        file = open("update\Real-time_inspection_tester_V.%s-master\setting.xml" %rtit, "w", encoding='UTF-8')
+        file = open("%s/setting.xml" %rtitpath2, "w", encoding='UTF-8')
         file.write(html)
         file.close()
 
         # 실행
-        os.system("call %s" %rtitpath)
+        os.system("call %s" %rtitpath1)
 
 # 이 프로그램은 모듈이 아닙니다!
 else:
