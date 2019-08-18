@@ -8,6 +8,12 @@
 * 자동업데이트 기능 추가
 * 버전 확인 사이트 : [ttps://newpremium.github.io/version/](https://newpremium.github.io/version/)
 
+### 사용 예시
+
+* 백신을 개발했는데 정상작동하는지 안하는지 테스트할때
+* 바이러스의 백신 감지
+* 바이러스 테스트(setting.xml 파일의 수정을 통함)
+
 ### 이전 버전
 
 X
