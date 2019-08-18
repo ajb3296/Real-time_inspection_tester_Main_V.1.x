@@ -9,6 +9,7 @@ import urllib.request
 import zipfile
 import shutil
 import socket
+import webbrowser
 
 if __name__=="__main__":
     
@@ -164,6 +165,21 @@ Please select a language
     rtitpath1 = rtitpath1.get_text()
     rtitpath2 = soup.find("rtitpath2")
     rtitpath2 = rtitpath2.get_text()
+    rtitmainver = soup.find("rtitmainver")
+    rtitmainver = rtitmainver.get_text()
+    rtitmainlink = soup.find("rtitmainlink")
+    rtitmainlink = rtitmainlink.get_text()
+
+    # 메인파일 버전 확인
+    if not rtit=="1.0":
+        if language=="ko":
+            updatemsg="메인 프로그램을 업데이트 해야 합니다. 3초후 다운로드 사이트로 이동합니다."
+        else:
+            updatemsg="You need to update the main program. Go to the download site in 3 seconds."
+        print(updatemsg)
+        time.sleep(3)
+        webbrowser.open_new(rtitmainlink)
+        exit()
 
     # 설치된 버전과 최신버전이 다를때
     if not rtit==version:
