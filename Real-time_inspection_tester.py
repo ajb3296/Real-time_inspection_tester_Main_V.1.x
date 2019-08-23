@@ -22,6 +22,10 @@ if __name__=="__main__":
     # 기본설정
     os.system("title Real-time_inspection_tester V.2.0")
     os.system("mode.com con cols=120 lines=40")
+
+    # 메인파일 버전
+    mainrtit="1.0"
+
     if os.path.exists("system/ver"):
         file = open("system/ver", "r", encoding='UTF-8')
         version=file.read()
@@ -171,7 +175,7 @@ Please select a language
     rtitmainlink = rtitmainlink.get_text()
 
     # 메인파일 버전 확인
-    if not rtit=="1.0":
+    if not rtitmainver==mainrtit:
         if language=="ko":
             updatemsg="메인 프로그램을 업데이트 해야 합니다. 3초후 다운로드 사이트로 이동합니다."
         else:
@@ -197,12 +201,16 @@ Please select a language
         os.mkdir("update")
 
         # 최신버전 다운로드
-        urllib.request.urlretrieve(url, "update/master.zip")
+        urllib.request.urlretrieve(url, "update/update.zip")
 
         # 압축풀기
-        zip_ref = zipfile.ZipFile("update/master.zip", 'r')
+        zip_ref = zipfile.ZipFile("update/update.zip", 'r')
         zip_ref.extractall("update")
         zip_ref.close()
+
+        # 다운로드한 압축파일 삭제
+        if os.path.isfile("update/update.zip"):
+            os.remove("update/update.zip")
 
         # 설정파일 설치
         file = open("%s/setting.xml" %rtitpath2, "w", encoding='UTF-8')
