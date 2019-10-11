@@ -11,7 +11,7 @@ import shutil
 import socket
 import webbrowser
 
-if __name__=="__main__":
+if __name__ == "__main__":
     
     # 압축 상태 확인
     if not os.path.exists("system/Real-time_inspection_test"):
@@ -24,14 +24,14 @@ if __name__=="__main__":
     os.system("mode.com con cols=120 lines=40")
 
     # 메인파일 버전
-    mainrtit="1.0"
+    mainrtit = "1.0"
 
     if os.path.exists("system/ver"):
-        file = open("system/ver", "r", encoding='UTF-8')
-        version=file.read()
+        file = open("system/ver", "r", encoding = 'UTF-8')
+        version = file.read()
         file.close()
     else:
-        version="*.*"
+        version = "*.*"
 
     print("""
                                                    QESASDDS
@@ -68,7 +68,7 @@ if __name__=="__main__":
     Loading. . .
     """ %version)
 
-    language="language"
+    language = "language"
 
     while True:
         # 설정파일이 존재하지 않을 경우 언어 선택
@@ -82,10 +82,10 @@ Please select a language
             language = input("<1/2> : ")
 
             if language == '1' or language == 'ko' or language == '한글' or language == 'korean':
-                language="ko"
+                language = "ko"
                 break
             elif language == '2' or language == 'en' or language == '영어' or language == "english":
-                language="en"
+                language = "en"
                 break
             else:
                 pass
@@ -93,7 +93,7 @@ Please select a language
             break
     # 설정파일 만들기
     if language == "ko" or language == "en":
-        file = open("setting.xml", "w", encoding='UTF-8')
+        file = open("setting.xml", "w", encoding = 'UTF-8')
         file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         file.write("<!-- Language (언어) -->\n")
         file.write("<language>%s</language>\n\n" %language)
@@ -107,8 +107,8 @@ Please select a language
         pass
 
     # 설정파일 읽어오기
-    file = open("setting.xml", "r", encoding='UTF-8')
-    html=file.read()
+    file = open("setting.xml", "r", encoding = 'UTF-8')
+    html = file.read()
     file.close()
     soup = BeautifulSoup(html, 'html.parser')
     language = soup.find("language")
@@ -129,14 +129,14 @@ Please select a language
         exit()
 
     # 인터넷 연결 확인
-    ipaddress=socket.gethostbyname(socket.gethostname())
+    ipaddress = socket.gethostbyname(socket.gethostname())
 
     # 인터넷 연결이 안되어 있을때
-    if ipaddress=="127.0.0.1":
+    if ipaddress == "127.0.0.1":
 
         # 이전에 다운받은 버전 존재 확인
         if os.path.exists("system/rtitpath"):
-            file = open("system/rtitpath", "r", encoding='UTF-8')
+            file = open("system/rtitpath", "r", encoding = 'UTF-8')
             rtitpath=file.read()
             file.close()
             # 이전에 설치해둔 버전 실행
@@ -144,7 +144,7 @@ Please select a language
 
         # 이전에 받아둔 버전이 없을 경우
         else:
-            if language=="ko":
+            if language == "ko":
                 print("\n    컴퓨터가 인터넷에 연결되어 있지 않고 이전에 설치한 프로그램이 존재하지 않습니다.\n    ENTER 키를 누르시면 종료합니다.")
                 os.system("pause>nul")
                 exit()
@@ -175,22 +175,22 @@ Please select a language
     rtitmainlink = rtitmainlink.get_text()
 
     # 메인파일 버전 확인
-    if not rtitmainver==mainrtit:
-        if language=="ko":
-            updatemsg="메인 프로그램을 업데이트 해야 합니다. 3초후 다운로드 사이트로 이동합니다."
+    if not rtitmainver == mainrtit:
+        if language == "ko":
+            updatemsg = "메인 프로그램을 업데이트 해야 합니다. 3초후 다운로드 사이트로 이동합니다."
         else:
-            updatemsg="You need to update the main program. Go to the download site in 3 seconds."
+            updatemsg = "You need to update the main program. Go to the download site in 3 seconds."
         print(updatemsg)
         time.sleep(3)
         webbrowser.open_new(rtitmainlink)
         exit()
 
     # 설치된 버전과 최신버전이 다를때
-    if not rtit==version:
-        if language=="ko":
-            updatemsg="프로그램을 새 버전으로 업데이트 해야 합니다. 자동으로 업데이트가 진행됩니다."
+    if not rtit == version:
+        if language == "ko":
+            updatemsg = "프로그램을 새 버전으로 업데이트 해야 합니다. 자동으로 업데이트가 진행됩니다."
         else:
-            updatemsg="You need to update the program to a new version. The update will proceed automatically."
+            updatemsg = "You need to update the program to a new version. The update will proceed automatically."
         print(updatemsg)
         
         # 업데이트 폴더 초기화
@@ -213,17 +213,17 @@ Please select a language
             os.remove("update/update.zip")
 
         # 설정파일 설치
-        file = open("%s/setting.xml" %rtitpath2, "w", encoding='UTF-8')
+        file = open("%s/setting.xml" %rtitpath2, "w", encoding = 'UTF-8')
         file.write(html)
         file.close()
 
         # 이전버전 다운로드 기록 저장 / 현재 버전 확인용
-        file = open("system/ver", "w", encoding='UTF-8')
+        file = open("system/ver", "w", encoding = 'UTF-8')
         file.write(rtit)
         file.close()
 
         # 이전버전 경로저장 / 인터넷 연결 없을때 이용
-        file = open("system/path", "w", encoding='UTF-8')
+        file = open("system/path", "w", encoding = 'UTF-8')
         file.write(rtitpath1)
         file.close()
 
@@ -234,7 +234,7 @@ Please select a language
     # 업데이트가 필요하지 않을 경우
     else:
         # 설정파일 설치
-        file = open("%s/setting.xml" %rtitpath2, "w", encoding='UTF-8')
+        file = open("%s/setting.xml" %rtitpath2, "w", encoding = 'UTF-8')
         file.write(html)
         file.close()
 
